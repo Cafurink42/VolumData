@@ -20,7 +20,7 @@
                      {{ __('Cargas de entrada') }}
                     </x-nav-link>
 
-                    <x-nav-link> 
+                    <x-nav-link :href="route('cargas-saida')" :active="request()->routeIs('cargas-saida')"> 
                         {{ __('Cargas de saída')}}
                     </x-nav-link>
                 </div>

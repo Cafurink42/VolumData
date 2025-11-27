@@ -27,6 +27,10 @@ Route::get('/cargas-entrada', function(){
 
 })->middleware(['auth', 'verified'])->name('cargas-entrada');
 
+Route::get('/cargas-saida', function(){
+    return view('cargas-saida');
+})->middleware(['auth', 'verified'])->name ('cargas-saida');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
