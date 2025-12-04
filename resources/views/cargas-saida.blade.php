@@ -59,7 +59,7 @@
         </div>
                 
         <x-primary-button class="mt-6 ml-4" >
-            {{ __('Registrar Entrada')}}
+            {{ __('Registrar Saída')}}
         </x-primary-button>
     </form>
 

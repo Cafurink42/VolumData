@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\EntradaData;
 
 class ProfileController extends Controller
 {
@@ -57,4 +58,31 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+    public function store(Request $request){
+        $request->validate([
+            'transportadora' => 'required|string|max:255', 
+            'produto' => 'required|string|max:255',
+            'peso_entrada' => 'required|integer',
+            'data_entrada' => 'required|date',
+            'motorista' => 'required|string|max:255',
+            'placa_veiculo' => 'required|string|max:255',
+            'empresa_origem' => 'required|string|max:255',
+            'empresa_destino' => 'required|string|max:255'
+        ]);
+
+        EntradaData::create([
+            'transportadora' => $request->transportadora,
+            'produto' => $request->produto,
+            'peso_entrada' => $request->peso_entrada,
+            'data_entrada' => $request->data_entrada,
+            'motorista'=> $request->motorista,
+            'placa_veiculo' => $request->placa_veiculo,
+            'empresa_origem' => $request->empresa_origem,
+            'empresa_destino' => $request->empresa_destino
+        ]);
+
+        return redirect()->back()->with('sucess', 'Carga de entrada registrada com sucesso!');
+    }
+
+
 }

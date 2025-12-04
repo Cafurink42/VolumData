@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <form method="POST" action="{{ route()}>
+    <form action="{{route('cargas.entrada.store')}}" method="POST">
        
         @csrf
            <div class="mt-4">
@@ -58,9 +58,9 @@
 
         </div>
                 
-        <x-primary-button class="mt-6 ml-4" >
+        <button type="submit" class="mt-6 ml-4 bg-blue-500 hover:bg-blue-700 text-white; font-bold py-2 px-4 rounded">
             {{ __('Registrar Entrada')}}
-        </x-primary-button>
+        </button>
     </form>
 
 

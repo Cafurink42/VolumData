@@ -12,6 +12,7 @@ return new class extends Migration
      * @return void
      */
     public function up(){
+        
         Schema::create('data_carga_entrada', function(Blueprint $table){
             $table->id();
                 $table->string('transportadora');
