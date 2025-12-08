@@ -82,7 +82,22 @@ class ProfileController extends Controller
         ]);
 
         return redirect()->back()->with('sucess', 'Carga de entrada registrada com sucesso!');
-    }
+    
+
+    SaidaData::create([
+        'transportadora' => $request->transportadora,
+        'produto' => $request->produto,
+        'peso_saida' => $request->peso_saida,
+        'data_saia' => $request->data_saida,
+        'motorista' => $request->motorista,
+        'placa_veiculo' => $request->placa_veiculo,
+        'empresa_origem'=>$request->empresa_origem,
+        'empresa_destino'=> $request->empresa_destino
+    ]);
+
+    return redirect()->back()->with('sucess', 'Carga de saída registra com suceso!');
+}
+
 
 
 }

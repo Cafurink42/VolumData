@@ -38,5 +38,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/cargas-entrada/store', [ProfileController::class, 'store'])->name('cargas.entrada.store');
+Route::post('/cargas-saida/store', [ProfileController::class, 'store'])->name('cargas.saida.store');
 
 require __DIR__.'/auth.php';
