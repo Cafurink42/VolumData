@@ -8,7 +8,7 @@
     <form action="{{route('cargas.entrada.store')}}" method="POST">
        
         @csrf
-           <div class="min-h-screen flex flex-col justify-center items-center mt-[-10%]">
+           <div class="min-h-screen flex flex-col justify-center items-center mt-[-10%] text-size-lg">
             <x-input-label for="t50ransportadora" :value="__('Transportadora')" />
             <x-text-input id="transportadora" class="block mt-1 w-[30%]"
                             type="text"

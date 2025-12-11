@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +30,7 @@ Route::get('/cargas-entrada', function(){
 
 Route::get('/cargas-saida', function(){
     return view('cargas-saida');
+    
 })->middleware(['auth', 'verified'])->name ('cargas-saida');
 
 Route::middleware('auth')->group(function () {
@@ -37,7 +39,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/cargas-entrada/store', [ProfileController::class, 'store'])->name('cargas.entrada.store');
-Route::post('/cargas-saida/store', [ProfileController::class, 'store'])->name('cargas.saida.store');
+Route::post('/cargas-entrada/store', [ProfileController::class, 'storeEntrada'])->name('cargas.entrada.store');
+Route::post('/cargas-saida/store', [ProfileController::class, 'storeSaida'])->name('cargas.saida.store');
+
+Route::get('/dashboard', function(){
+    return view ('dashboard', [
+        'cargasEntrada' => App\Models\EntradaData::all(),
+        'cargasSaida' => App\Models\SaidaData::all(),
+
+    ]);
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 require __DIR__.'/auth.php';

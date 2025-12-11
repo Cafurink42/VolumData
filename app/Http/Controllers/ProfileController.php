@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\EntradaData;
+use App\Models\SaidaData;
 
 class ProfileController extends Controller
 {
@@ -58,46 +59,39 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-    public function store(Request $request){
-        $request->validate([
-            'transportadora' => 'required|string|max:255', 
-            'produto' => 'required|string|max:255',
-            'peso_entrada' => 'required|integer',
-            'data_entrada' => 'required|date',
-            'motorista' => 'required|string|max:255',
-            'placa_veiculo' => 'required|string|max:255',
-            'empresa_origem' => 'required|string|max:255',
-            'empresa_destino' => 'required|string|max:255'
-        ]);
+    public function storeEntrada(Request $request){
+        EntradaData::create($request->all());
+        return redirect()->route('cargas-entrada')->with('sucess', 'Carga de entrada registrada com sucesso!');
+    }
 
-        EntradaData::create([
-            'transportadora' => $request->transportadora,
-            'produto' => $request->produto,
-            'peso_entrada' => $request->peso_entrada,
-            'data_entrada' => $request->data_entrada,
-            'motorista'=> $request->motorista,
-            'placa_veiculo' => $request->placa_veiculo,
-            'empresa_origem' => $request->empresa_origem,
-            'empresa_destino' => $request->empresa_destino
-        ]);
+      public function storeSaida(Request $request){
+        SaidaData::create($request->all());
+        return redirect()->route('cargas-saida')->with('sucess', 'Carga de saída registrada com sucesso!');
+      }
 
-        return redirect()->back()->with('sucess', 'Carga de entrada registrada com sucesso!');
+
+        
+
+}
+
+
+
+
+
+
+        
+
     
 
-    SaidaData::create([
-        'transportadora' => $request->transportadora,
-        'produto' => $request->produto,
-        'peso_saida' => $request->peso_saida,
-        'data_saia' => $request->data_saida,
-        'motorista' => $request->motorista,
-        'placa_veiculo' => $request->placa_veiculo,
-        'empresa_origem'=>$request->empresa_origem,
-        'empresa_destino'=> $request->empresa_destino
-    ]);
-
-    return redirect()->back()->with('sucess', 'Carga de saída registra com suceso!');
-}
 
 
 
-}
+    
+
+
+
+
+
+
+
+
