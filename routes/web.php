@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DescargaController;
+
+use App\Http\Controllers\CargasController;
+
+
 
 
 /*
@@ -42,13 +47,18 @@ Route::middleware('auth')->group(function () {
 Route::post('/cargas-entrada/store', [ProfileController::class, 'storeEntrada'])->name('cargas.entrada.store');
 Route::post('/cargas-saida/store', [ProfileController::class, 'storeSaida'])->name('cargas.saida.store');
 
-Route::get('/dashboard', function(){
-    return view ('dashboard', [
-        'cargasEntrada' => App\Models\EntradaData::all(),
-        'cargasSaida' => App\Models\SaidaData::all(),
+//Route::get('/dashboard', function(){
+    //return view ('dashboard', [
+      //  'cargasEntrada' => App\Models\EntradaData::all(),
+       // 'cargasSaida' => App\Models\SaidaData::all(),
 
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+   // ]);
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
+
+//Route::get('/importar-api', [DescargaController::class, 'buscarPorApi'])->name('importar.api');
+
+
+Route::get('/dashboard', [CargasController::class, 'filter'])->name('dashboard.filter');
 
 require __DIR__.'/auth.php';

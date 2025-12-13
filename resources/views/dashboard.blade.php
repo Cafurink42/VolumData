@@ -8,7 +8,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{route('dashboard')}}" method="GET">
+                    <form action="{{route('dashboard.filter')}}" method="GET">
                         @csrf
                         <div class="flex items-end gap-6">
                              <div>
@@ -36,75 +36,40 @@
                              </div>
 
                              <div class = "flex flex-col gap-6">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <p>Cargas de Entrada</p>
-                                            <th class="px-4 py-2">Produto</th>
-                                            <th class="px-4 py-2">Placa</th>
-                                            <th class="px-4 py-2">Peso da Carga</th>
-                                            <th class="px-4 py-2">Data </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($cargasEntrada as $carga)
-                                        <tr>
-                                            <td class="border px-4 py-2">{{$carga->produto}}</td>
-                                            <td class="border px-4 py-2">{{$carga->placa_veiculo}}</td>
-                                            <td class="border px-4 py-2">{{$carga->peso_entrada}}</td>
-                                            <td class="border px-4 py-2">{{$carga->data_entrada}}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-
-                                     <table>
-                                    <thead>
-                                        <tr>
-                                            <p class=''>Cargas de Saída</p>
-                                            <th class="px-4 py-2">Produto</th>
-                                            <th class="px-4 py-2">Placa</th>
-                                            <th class="px-4 py-2">Peso da Carga</th>
-                                            <th class="px-4 py-2">Data </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($cargasSaida as $carga)
-                                        <tr>
-                                            <td class="border px-4 py-2">{{$carga->produto}}</td>
-                                            <td class="border px-4 py-2">{{$carga->placa_veiculo}}</td>
-                                            <td class="border px-4 py-2">{{$carga->peso_saida}}</td>
-                                            <td class="border px-4 py-2">{{$carga->data_saida}}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-
-
-
-
-
-                                @if ($cargasEntrada->isEmpty() and $cargasSaida->isEmpty())
-                                    <div class="mt-4">Nenhuma carga encontrada.</div>
-                                @endif
-
                          
                             </div>
 
-
-
-                            
-
-  
                         </div>
                         
-
-                             
                         </div>
                         <x-primary-button class="mt-4">
                             {{ __('Filtrar')}}
                         </x-primary-button>
+
                     </form>
+                    <table class="mt-6 border-collapse border border-gray-400">
+                        <thead>
+                            <tr>
+                                <th class="border border-gray-300 px-4 py-2">Data de Entrada</th>
+                                <th class="border border-gray-300 px-4 py-2">Tipo Produto</th>
+                                <!--<th class="border border-gray-300 px-4 py-2">Quantidade (L)</th>
+                                <th class="border border-gray-300 px-4 py-2">Data de Entrada</th>
+                                <th class="border border-gray-300 px-4 py-2">Tipo de Carga</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($resultados as $item)
+                                <tr>
+                                    <!--<td class="border border-gray-300 px-4 py-2">{{ $item->id }}</td>-->
+                                    <td class="border border-gray-300 px-4 py-2">{{ $item->data_entrada}}</td>
+                                    <td class="border border-gray-300 px-4 py-2">{{ $item->produto}}</td>
+                                    <!--<td class="border border-gray-300 px-4 py-2">{{ $item->data_entrada }}</td>
+                                    <td class="border border-gray-300 px-4 py-2">{{ $item->tipo_carga }}</td>-->
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>

@@ -13,23 +13,27 @@
             <x-text-input id="transportadora" class="block mt-1 w-[30%]"
                             type="text"
                             name="transportadora"
-                            required autocomplete="transportadora" />
+                            required autocomplete="transportadora" 
+                            value="{{$descarga['descricao_rota'] ?? '' }}"/>
           <x-input-label for="produto" :value="__('Produto')" />
           <x-text-input id="produto" class="block mt-1 w-[30%]"
                             type="text"
                             name="produto"
+                            value="{{$descarga['tipo'] ?? ''}}"
                             required autocomplete="produto" />
 
         <x-input-label for="peso_entrada" :value="__('Peso de Entrada')" />
         <x-text-input id="produto" class="block mt-1 w-[30%]"
                             type="number"
                             name="peso_entrada"
+                            value="{{$descarga['peso_entrada'] ?? ''}}"
                             required autocomplete="peso_entrada" />
 
         <x-input-label for="data_entrada" :value="__('Data de Entrada')" />
         <x-text-input id="data_entrada" class="block mt-1 w-[30%]"
                             type="date"
                             name="data_entrada"
+
                             required autocomplete="data_entrada" />
 
         <x-input-label for="motorista" :value="__('Motorista')" />
@@ -61,7 +65,7 @@
             <x-primary-button type="submit" class="mt-6 ml-4 bg-green-500 hover:bg-green-700 text-white;  font-bold py-2 px-4 r">
                 {{ __('Registrar Entrada')}}
             </x-primary-button>
-        </div>  
+        </div>    
     </form>
 
 
