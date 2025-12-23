@@ -22,5 +22,7 @@ class EntradaData extends Model
         'empresa_destino'
     ];
 
+
+
     protected $table = 'data_carga_entrada';
 }

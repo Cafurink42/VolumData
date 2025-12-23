@@ -6,35 +6,24 @@ use Illuminate\Http\Request;
 
 use App\Models\EntradaData;
 
+use Illuminate\Support\Facades\DB;
+
 class CargasController extends Controller
 {
-    public function filter(Request $request){
-        $query = EntradaData::query();
-
-        //filter por data
-
-        if ($request->filled('data_entrada')){
-
-            $data = str_replace('/', '-', $request->data_entrada);
-            $data_format = date('Y-m-d', strtotime($data));   
-
-            $query->whereDate('data_entrada' == $data_format);
-
-        }
+    public function Filter (Request $request) {
+        $tipoSelecionado = $request->query('tipo_produto');
+        $dataSelecinado = $request->query('data_entrada');
 
 
-        if ($request->filled('produto')){
-            $query->where('produto', $request->input('produto'));
-        }
-        
-
-
-        $resultados = $query->get();
-
-        //return view ('filtro-cargas-entrada', ['resultados' => $resultados]);
-
-        return view ('dashboard', ['resultados' => $resultados]);
-
-
+        $resultados = DB::table('data_carga_entrada')->when($tipoSelecionado, function($query, $produto) {
+                return $query->where('produto', $produto); 
+            })->get();
+      
+            
+        return view('dashboard', compact('resultados')); 
     }
+
+     
+
+    
 }

@@ -12,16 +12,17 @@
                         @csrf
                         <div class="flex items-end gap-6">
                              <div>
-                                 <x-input-label for="data_entrada" :value="__('Data Entrada')" />
-                                 <x-text-input type="date" class="w-40" />
+                                 <x-input-label id = "data" for="data_entrada" :value="__('Data Entrada')" />
+                                 <input type="date" id="filter_date" name="filter_date" value="{{ request('filter_date') }}">
+                                <!-- <x-text-input type="date"  value = "{{request('data_entrada')}}" name="data_entrada" class="w-40"/> -->
                              </div>
                              <div>
                                 <x-input-label for="produto" :value="__('Filtrar por Produto')" />
 
                                 <select id = "tipo_produto" name = "tipo_produto" class= "rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900">
-                                    <option value="leite">Leite</option>
-                                    <option value="soro">Soro</option>
-                                    <option value="creme">Creme</option>
+                                    <option value="leite" {{ request('tipo_produto') == 'leite' ? 'selected' : '' }}>Leite</option>
+                                    <option value="soro" {{ request('tipo_produto') == 'soro' ? 'selected' : '' }}>Soro</option>
+                                    <option value="creme" {{ request('tipo_produto') == 'creme' ? 'selected' : '' }}>Creme</option>
                                 </select>   
 
 
@@ -58,16 +59,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($resultados as $item)
+                            @forelse($resultados as $item)
                                 <tr>
                                     <!--<td class="border border-gray-300 px-4 py-2">{{ $item->id }}</td>-->
-                                    <td class="border border-gray-300 px-4 py-2">{{ $item->data_entrada}}</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ $item->produto}}</td>
+                                    <td class=" px-4 py-2">{{ $item->data_entrada}}</td>
+                                    <td class = "px-4 py-2">{{ $item->produto}}</td>
                                     <!--<td class="border border-gray-300 px-4 py-2">{{ $item->data_entrada }}</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ $item->tipo_carga }}</td>-->
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                     <td colspan="2" class="border border-gray-300 px-4 py-2 text-center">Nenhum registro encontrado</td>
+                                 <tr>
+                            @endforelse
                         </tbody>
+                           
+                    
                     </table>
 
                 </div>
